@@ -14,7 +14,7 @@ class Rooms(models.Model):
         if not self.qr_code:
             room_name = self.name
             qr_code = wifi_qrcode_generator.wifi_qrcode(
-                    f'{room_name}', False, 'WPA', '1597538524560fozk')
+                    f'{room_name}', False, 'WPA', 'your-wifi-key')
             
             file_name = f'qr-code-{room_name}.png'
             buffer = BytesIO()
