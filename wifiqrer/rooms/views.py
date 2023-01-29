@@ -9,18 +9,19 @@ from rooms.models import Rooms
 def index(request):
     
     wifi_form = RoomForm(request.POST or None)
-
-    context = {
-        "wifi_form" : wifi_form,
-    }     
+ 
     if request.method == 'POST':
         if wifi_form.is_valid():
             name = wifi_form.cleaned_data['name']
             password = wifi_form.cleaned_data['password']
             wifi_qr = Rooms.objects.create(name = name , password = password)
-            print(wifi_qr)
             wifi_qr.save() 
             return HttpResponseRedirect(reverse('wifi_qr_detail', args=[wifi_qr.id]))
+    
+    
+    context = {
+        "wifi_form" : wifi_form,
+    }    
     return render(request,'rooms/index.html',context)
 
 
